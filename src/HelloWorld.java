@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 /**
  * Created by Cheong on 2/11/2017.
@@ -17,9 +18,20 @@ public class HelloWorld {
 
         String htmlCode;
 
+        // news.naver.com에서 html 소스 받아오기
         htmlCode = getUrlSource("http://news.naver.com/");
 
-        System.out.println(htmlCode);
+        // 받아온 소스에서 title 부분 전부 split 하여 배열에 넣기
+        String[] titles = htmlCode.split("title = \"");
+
+        for (String t : titles) {
+            String title;
+            title = t.split("\"")[0]; // title 뒷부분에 불필요한 문자 삭제 (큰따옴표까지)
+
+            System.out.println(title); // 제목 출력
+        }
+
+        //System.out.println(htmlCode);
     }
 
     /**
